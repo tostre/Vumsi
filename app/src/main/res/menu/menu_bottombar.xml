@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_reader"
+        android:enabled="true"
+        android:icon="@drawable/ic_chrome_reader_mode_black_24dp"
+        android:title="Reader"/>
+    <item
+        android:id="@+id/menu_saved"
+        android:enabled="true"
+        android:icon="@drawable/ic_favorite_black_24dp"
+        android:title="Saved"/>
+    <item
+        android:id="@+id/menu_recents"
+        android:enabled="true"
+        android:icon="@drawable/ic_history_black_24dp"
+        android:title="Recents"/>
+
+
+
+</menu>

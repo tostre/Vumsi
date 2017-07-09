@@ -102,9 +102,9 @@ public class ImageFetcher extends AsyncTask<String, Void, Bitmap> {
         int screenWidth = displayMetrics.widthPixels;
         int imageHeight = image.getHeight();
         int imageWidth = image.getWidth();
-        int scaleFactor = imageWidth/screenWidth;
+        double scaleFactor = ((double)imageWidth)/screenWidth;
 
-        imageHeight = imageHeight/scaleFactor;
+        imageHeight = (int)(imageHeight/scaleFactor);
         imageWidth = screenWidth;
 
         image = Bitmap.createScaledBitmap(image, imageWidth, imageHeight, true);

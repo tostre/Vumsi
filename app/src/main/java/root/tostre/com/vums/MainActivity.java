@@ -16,6 +16,7 @@ import android.text.Html;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -46,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
 
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.image_progressBar);
         progressBar.setVisibility(View.GONE);
+
+        WebView wv = (WebView) findViewById(R.id.content_text);
+        wv.getSettings().setJavaScriptEnabled(true);
     }
 
     @Override
@@ -93,11 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
         ((CollapsingToolbarLayout) findViewById(R.id.toolbar_layout)).setTitle(title);
 
-        if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N){
-            ((TextView) findViewById(R.id.content_text)).setText(Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY));
-        } else {
-            ((TextView) findViewById(R.id.content_text)).setText(Html.fromHtml(text));
-        }
+        ((WebView) findViewById(R.id.content_text)).loadData(text, "text/html; charset=utf-8", "utf-8");
 
 
         loadingStatus++;

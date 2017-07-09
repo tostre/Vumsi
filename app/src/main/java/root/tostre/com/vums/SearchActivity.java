@@ -106,15 +106,15 @@ public class SearchActivity extends AppCompatActivity {
                 switch(position){
                     case 0:
 
-                        apiEndpointArticle = "https://en.wikipedia.org/w/api.php?format=xml&redirects=yes&action=parse&disableeditsection=true&page=";
+                        apiEndpointArticle = "https://en.wikipedia.org/w/api.php?format=json&redirects=yes&action=parse&disableeditsection=true&page=";
                         apiEndpointImg = "https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&piprop=original&format=xml&titles=";
-                        apiEndpointSearch = "https://en.wikipedia.org/w/api.php?action=query&list=search&srlimit=20&format=xml&srsearch=";
+                        apiEndpointSearch = "https://en.wikipedia.org/w/api.php?action=query&list=search&srlimit=20&format=json&srsearch=";
                         loadSearchResults();
                         break;
                     case 1:
                         apiEndpointArticle = "https://de.wikipedia.org/w/api.php?format=xml&redirects=yes&action=parse&disableeditsection=true&page=";
                         apiEndpointImg ="https://de.wikipedia.org/w/api.php?action=query&prop=pageimages&piprop=original&format=xml&titles=";
-                        apiEndpointSearch = "https://de.wikipedia.org/w/api.php?action=query&list=search&srlimit=20&format=xml&srsearch=";
+                        apiEndpointSearch = "https://de.wikipedia.org/w/api.php?action=query&list=search&srlimit=20&format=json&srsearch=";
                         loadSearchResults();
                         break;
                 }

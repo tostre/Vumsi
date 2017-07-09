@@ -4,14 +4,19 @@ import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -48,21 +53,25 @@ public class SearchFetcher extends AsyncTask<String, Void, String> {
 
         try {
             InputStream inputStream = new URL(searchUrl).openStream();
-            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            Document document = documentBuilder.parse(inputStream);
-            document.getDocumentElement().normalize();
-            Element root = document.getDocumentElement();
 
-            NodeList pageList = document.getElementsByTagName("p");
+            BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+            StringBuilder sb = new StringBuilder();
 
-            if(pageList.getLength() > 0){
+            String line = null;
 
-                for(int i = 0; i < pageList.getLength(); i++){
-                    Node pageNodeX = pageList.item(i);
-                    Element pageElementX = (Element) pageNodeX;
-                    String aX = pageElementX.getAttribute("title");
-                    articleList.add(aX);
+            while ((line = br.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+
+            JSONObject result = new JSONObject(sb.toString());
+
+            JSONArray search = result.getJSONObject("query").getJSONArray("search");
+
+            if(search.length() > 0){
+
+                for(int i = 0; i < search.length(); i++){
+                    JSONObject res = search.getJSONObject(i);
+                    articleList.add(res.getString("title"));
                 }
 
                 inputStream.close();
@@ -72,9 +81,7 @@ public class SearchFetcher extends AsyncTask<String, Void, String> {
 
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 
